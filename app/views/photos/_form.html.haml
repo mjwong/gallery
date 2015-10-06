@@ -1,0 +1,15 @@
+= simple_form_for(@photo, html: { class: 'form-horizontal' }) do |f|
+  - if @photo.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@photo.errors.count, "error")} prohibited this photo from being saved:"
+      %ul
+        - @photo.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label "Album ID"
+    = f.input :album_id, label: "Album", collection: Album::NAMES_IDS, selected: @album.id
+    = f.input :caption
+    = f.input :avatar, as: :file
+  .actions
+    = f.submit 'Save'
